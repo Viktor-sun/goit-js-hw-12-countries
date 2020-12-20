@@ -1,0 +1,17 @@
+{{!-- {{#each this}} --}}
+<article style="display: flex;">
+    <div>
+        <h2>{{name}}</h2>
+
+        <p>Capital: {{capital}}</p>
+        <p>Population: {{population}}</p>
+        <p>Languages:</p>
+        <ul>
+            {{#each languages}}
+            <li>{{name}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    <img src="{{flag}}" alt="" width="320">
+</article>
+{{!-- {{/each}} --}}
