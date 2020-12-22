@@ -6,11 +6,6 @@ const { boxCountries, country } = refs;
 import './notifications';
 import { info, success, error } from '@pnotify/core';
 
-const cleanMarkup = () => {
-  boxCountries.innerHTML = '';
-  country.innerHTML = '';
-};
-
 export function onInputHandler(event) {
   cleanMarkup();
   const searchQuery = event.target.value;
@@ -19,8 +14,19 @@ export function onInputHandler(event) {
   }
 }
 
+export function onClickHandler(event) {
+  cleanMarkup();
+  const searchQuery = event.target.textContent;
+  fetchCountries(searchQuery).then(queriesHandler);
+}
+
+function cleanMarkup() {
+  boxCountries.innerHTML = '';
+  country.innerHTML = '';
+}
+
 function queriesHandler(res) {
-  console.log(res);
+  // console.log(res);
   if (res.length === 1) {
     country.insertAdjacentHTML('afterbegin', teplateCountry(res[0]));
     success({ title: 'Success search!' });

@@ -34,6 +34,12 @@ body {
   list-style: none;
 }
 
+.box-counties > li:hover {
+  background-color: crimson;
+  cursor: pointer;
+  transition: background-color 1s ease;
+}
+
 .box-counties > li::before {
   content: '\2022';
   font-weight: 700;
