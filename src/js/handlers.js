@@ -4,25 +4,36 @@ import teplateCountries from '../template/teplateCountries.hbs';
 import refs from './refs';
 const { boxCountries, country } = refs;
 import './notifications';
-import { alert, notice, info, success, error } from '@pnotify/core';
+import { info, success, error } from '@pnotify/core';
 
-export function onInputHandler(event) {
+const cleanMarkup = () => {
   boxCountries.innerHTML = '';
   country.innerHTML = '';
+};
 
+export function onInputHandler(event) {
+  cleanMarkup();
   const searchQuery = event.target.value;
-  fetchCountries(searchQuery)
-    .then(res => {
-      console.log(res);
-      if (res.length === 1) {
-        country.insertAdjacentHTML('afterbegin', teplateCountry(res[0]));
-      } else if (res.length > 1 && res.length < 11) {
-        boxCountries.insertAdjacentHTML('afterbegin', teplateCountries(res));
-      } else {
-        error({
-          text: 'Too many matches found. Please enter a more specific query!',
-        });
-      }
-    })
-    .catch(() => {});
+  if (searchQuery) {
+    fetchCountries(searchQuery).then(queriesHandler);
+  }
+}
+
+function queriesHandler(res) {
+  console.log(res);
+  if (res.length === 1) {
+    country.insertAdjacentHTML('afterbegin', teplateCountry(res[0]));
+    success({ title: 'Success search!' });
+  } else if (res.length > 1 && res.length < 11) {
+    boxCountries.insertAdjacentHTML('afterbegin', teplateCountries(res));
+    info({
+      text: 'Here is what was found.',
+    });
+  } else if (res.length > 10) {
+    error({
+      text: 'Too many matches found. Please enter a more specific query!',
+    });
+  } else {
+    error({ title: 'Not Found', text: 'Please enter again.' });
+  }
 }

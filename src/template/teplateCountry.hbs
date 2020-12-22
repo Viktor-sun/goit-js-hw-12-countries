@@ -1,17 +1,15 @@
-{{!-- {{#each this}} --}}
-<article style="display: flex;">
+<article class="country">
     <div>
-        <h2>{{name}}</h2>
+        <h2 class="country-title">{{name}}</h2>
 
-        <p>Capital: {{capital}}</p>
-        <p>Population: {{population}}</p>
-        <p>Languages:</p>
-        <ul>
+        <p class="country-subtitle"><span class="info">Capital:</span> {{capital}}</p>
+        <p class="country-subtitle"><span class="info">Population:</span> {{population}}</p>
+        <p class="country-subtitle"><span class="info">Languages:</span></p>
+        <ul class="languages">
             {{#each languages}}
             <li>{{name}}</li>
             {{/each}}
         </ul>
     </div>
-    <img src="{{flag}}" alt="" width="320">
+    <img src="{{flag}}" alt="flag" width="320">
 </article>
-{{!-- {{/each}} --}}
