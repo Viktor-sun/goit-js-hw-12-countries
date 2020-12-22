@@ -2,7 +2,7 @@ import fetchCountries from './fetchCountries';
 import teplateCountry from '../template/teplateCountry.hbs';
 import teplateCountries from '../template/teplateCountries.hbs';
 import refs from './refs';
-const { boxCountries, country } = refs;
+const { input, boxCountries, country } = refs;
 import './notifications';
 import { info, success, error } from '@pnotify/core';
 
@@ -18,6 +18,7 @@ export function onClickHandler(event) {
   cleanMarkup();
   const searchQuery = event.target.textContent;
   fetchCountries(searchQuery).then(queriesHandler);
+  input.value = '';
 }
 
 function cleanMarkup() {
